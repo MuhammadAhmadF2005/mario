@@ -2,6 +2,8 @@
 
 A custom clone of Super Mario Bros. for the Nintendo Entertainment System, implemented in Javascript. This is a personalized version maintained and updated by **Muhammad Ahmad** (GitHub: [MuhammadAhmadF2005](https://github.com/MuhammadAhmadF2005)).
 
+check the game out at https://mario-vert.vercel.app/
+
 It implements a hand-built game engine using the HTML5 Canvas.
 
 Disclaimer: This project is for demonstration only. If you really want to play Mario, please do it on a console. The graphics, sounds, and original design of Super Mario Bros. are all owned by Nintendo.
