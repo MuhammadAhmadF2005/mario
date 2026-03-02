@@ -1,13 +1,22 @@
+# Mario - Personalized Edition
 
-[![Mario](http://www.garrettjohnson.net/images/fulls/mariofull.png)](http://www.garrettjohnson.net/mario)
-#Mario
-[Mario.js](www.garrettjohnson.net/mario "Mario.js") is a clone of Super Mario Bros. for the Nintendo Entertainment System, implemented in Javascript.  It implements a hand-built game engine using the HTML5 Canvas.
+A custom clone of Super Mario Bros. for the Nintendo Entertainment System, implemented in Javascript. This is a personalized version maintained and updated by **Muhammad Ahmad** (GitHub: [MuhammadAhmadF2005](https://github.com/MuhammadAhmadF2005)).
+
+check the game out at https://mario-vert.vercel.app/
+
+It implements a hand-built game engine using the HTML5 Canvas.
 
 Disclaimer: This project is for demonstration only. If you really want to play Mario, please do it on a console. The graphics, sounds, and original design of Super Mario Bros. are all owned by Nintendo.
 
-#Engine
+## Custom Touches To Come
+* **Custom Character Sprite:** Modifying Mario's sprite to personal pixel art.
+* **Thematic Level Design:** Creating custom levels using the engine's built-in generation logic.
+* **Audio Swap:** Changing core sounds for a unique feel.
+* **Custom Branded UI:** Enhancing `index.html` and adding personalized links.
 
-##Game Flow
+# Engine
+
+## Game Flow
 The main loop tries to render at 60fps. Each frame, we go through a few steps to update the game, and then render.
 
 First, we get the controls. Depending on what the player is pressing, we make some changes to the player object.
@@ -18,7 +27,7 @@ Scrolling is implemented using a viewport position that increases as Mario trave
 
 The update function contains all of the logic for mutating the object's state without data from other entities. Once each object has updated, we check collisions. Independent movement, such as coins popping out of blocks, or Mario grabbing the flag and running out of the stage, are controlled here.
 
-##Collision
+## Collision
 For obstacles such as walls, the ground, and the various blocks, they are indexed by their position in the game, so each entity only needs to check the area around itself for collision with those.
 
 Then, each entity iterates through the other active entities to determine collision with moving objects, calling functions to update positions and state as appropriate.
@@ -27,7 +36,7 @@ The player object only checks collision with terrain. Enemies and items check th
 
 Note that collision boxes are separate from the display position of the entity's sprite. This was the case in the original game as well. Generally speaking, making the collision slightly more generous improves game feel.
 
-##Rendering
+## Rendering
 Once everything is in its proper place, we call each object's render function. Since the canvas doesn't implement a z-axis, the layering effect is handled entirely by rendering the objects in this order:
 
 Background
@@ -45,27 +54,34 @@ Sprites assume that the entire animation is contained on a single row of the she
 
 Similarly, entities which need to face left and right replace the image reference in their sprite object with a flipped counterpart.
 
-
-#Level Generation
+# Level Generation
 Each level object is created with references to the sprites to use for each type of object in the game. In this case, there are only a few tile sets, so individual levels could inherit from level subclasses for overworld, underground, castle, etc.
 
 The level is constructed using a series of calls to functions that populate the tables of objects in the game world.
 
 Pipes work by setting up the animation, and then calling a function to load the new level. Exit pipes use the same code for moving Mario, but with another callback that puts the player into position after setting up the stage.
 
-Known Bugs and Features to Come
-===============================
--Scaling sprites makes them appear with awkward borders. Some fiddling helps this (as you can see in the live version), but they are still not quite perfect.
--A rare case that causes invincibility from getting hit to never end.
--Goombas don't animate in sync with each other.
--Sometimes goombas can get stuck inside each other. I'm not entirely sure what causes this.
--Some sounds might not work due to format compatibility, especially in IE. Yes, IE doesn't support Microsoft's own file format. Really.
+## Known Bugs and Original Features to Come
+* Scaling sprites makes them appear with awkward borders. Some fiddling helps this, but they are still not quite perfect.
+* A rare case that causes invincibility from getting hit to never end.
+* Goombas don't animate in sync with each other.
+* Sometimes goombas can get stuck inside each other.
+* Some sounds might not work due to format compatibility, especially in IE.
 
-All of the features to be implemented are the actual features of the game!
-Namely, a score counter, more types of enemies, and 1up mushrooms.
+## Deployment with Vercel
+This project is built using basic HTML, CSS, and vanilla JavaScript and requires no build step to run!
 
-And more levels!
+To easily deploy this personalized Mario game live and share it over the internet for free, you can use **Vercel**:
 
-Also, it should be possible to scale the game to any size, although in order to preserve sprite dimensions changing the actual size of the play area will be necessary for widescreen. For now, the game is rendered in 768x720.
+1. Log into your [Vercel](https://vercel.com) dashboard.
+2. Click **Add New...** -> **Project**.
+3. Import this repository straight from your GitHub account.
+4. Leave all default settings exactly as they are (Framework Preset: Other).
+5. Click **Deploy**.
 
-Beyond that, it would be nice to recreate the original game in even more detail, including the precise replication of the 21-frame rule, and glitches such as well-ejection errors, alternate pipes, and various simultaneous left+right input shenanigans.
+Vercel will build your static files in seconds and give you a live URL where you can play the game anywhere!
+
+### Alternative Hosting
+Since this is a static site (just `index.html`), it can be hosted absolutely anywhere that serves static files. Other excellent free alternatives include:
+* **GitHub Pages:** Go to your Repo Settings -> Pages -> Deploy from a branch (main) -> Save.
+* **Netlify:** Drag and drop this folder directly onto their app platform.
